@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications - Recruitment System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .applications-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .status-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .application-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .application-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .status-submitted { background-color: #e5e7eb; color: #374151; }
+        .status-reviewing { background-color: #dbeafe; color: #1e40af; }
+        .status-interview { background-color: #fef3c7; color: #92400e; }
+        .status-offered { background-color: #d1fae5; color: #065f46; }
+        .status-rejected { background-color: #fee2e2; color: #991b1b; }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e5e7eb;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .search-input {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="applications-container">
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">My Applications</h2>
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Apply for Jobs
+            </button>
+        </div>
+
+        <!-- Status Overview -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="status-card">
+                    <h3 class="h2 mb-0 text-primary">12</h3>
+                    <p class="text-muted mb-0">Total Applications</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="status-card">
+                    <h3 class="h2 mb-0 text-warning">4</h3>
+                    <p class="text-muted mb-0">In Progress</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="status-card">
+                    <h3 class="h2 mb-0 text-success">2</h3>
+                    <p class="text-muted mb-0">Interviews Scheduled</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="status-card">
+                    <h3 class="h2 mb-0 text-danger">6</h3>
+                    <p class="text-muted mb-0">Closed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text border-0 bg-white">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control search-input border-0" placeholder="Search applications...">
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <button class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-filter me-2"></i>Filter
+                </button>
+                <button class="btn btn-outline-secondary">
+                    <i class="fas fa-sort me-2"></i>Sort
+                </button>
+            </div>
+        </div>
+
+        <!-- Applications List -->
+        <div class="application-card p-4 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <div class="company-logo me-3">
+                            <i class="fas fa-building text-primary"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Senior Software Engineer</h5>
+                            <p class="mb-0 text-muted">TechCorp Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-3 mb-md-0">
+                    <span class="status-badge status-interview">Interview Scheduled</span>
+                </div>
+                <div class="col-md-2 mb-3 mb-md-0">
+                    <small class="text-muted d-block">Applied on</small>
+                    <strong>Jan 15, 2024</strong>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <button class="btn btn-link text-primary p-0" data-bs-toggle="collapse" data-bs-target="#application1">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Collapsed Details -->
+            <div class="collapse mt-4" id="application1">
+                <div class="border-top pt-4">
+                    <h6 class="mb-3">Application Timeline</h6>
+                    <div class="timeline-item pb-4">
+                        <small class="text-muted">January 25, 2024</small>
+                        <p class="mb-0">Interview scheduled with Technical Team</p>
+                    </div>
+                    <div class="timeline-item pb-4">
+                        <small class="text-muted">January 20, 2024</small>
+                        <p class="mb-0">Application under review</p>
+                    </div>
+                    <div class="timeline-item">
+                        <small class="text-muted">January 15, 2024</small>
+                        <p class="mb-0">Application submitted</p>
+                    </div>
+                </div>
+                <div class="border-top pt-4 mt-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Application Details</h6>
+                            <p class="mb-2"><strong>Location:</strong> New York, NY</p>
+                            <p class="mb-2"><strong>Job Type:</strong> Full Time</p>
+                            <p class="mb-2"><strong>Salary Range:</strong> $120K - $150K</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Upcoming Interview</h6>
+                            <p class="mb-2"><strong>Date:</strong> January 30, 2024</p>
+                            <p class="mb-2"><strong>Time:</strong> 2:00 PM EST</p>
+                            <p class="mb-2"><strong>Type:</strong> Video Call</p>
+                            <button class="btn btn-outline-primary btn-sm mt-2">
+                                <i class="fas fa-video me-2"></i>Join Interview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Application Cards (Similar Structure) -->
+        <!-- Add more application cards here -->
+
+        <!-- Pagination -->
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
